@@ -9,6 +9,8 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,10 +22,12 @@ import com.playlist.entity.JwtRequest;
 import com.playlist.entity.JwtResponse;
 import com.playlist.entity.Usuario;
 import com.playlist.exceptions.UsuarioNotFoundException;
+import com.playlist.repository.UsuarioRepository;
 import com.playlist.serviceImpl.UserDetailsServiceImpl;
 
 @RestController
 @RequestMapping("*")
+@CrossOrigin("*")
 public class AuthController {
 	
     
@@ -32,6 +36,9 @@ public class AuthController {
     
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
+    
+    @Autowired
+    private UsuarioRepository usuarioRepository;
     
     @Autowired
     private JwtUtil jwtUtils;
@@ -61,8 +68,11 @@ public class AuthController {
     }
     
     @GetMapping("/actual-usuario")
-    public Usuario ObtenerUsuarioActual(Principal principal){
-        return (Usuario) this.userDetailsService.loadUserByUsername(principal.getName());
+    public ResponseEntity<?> ObtenerUsuarioActual(Principal principal) {
+        Usuario usuario = usuarioRepository.findByUsername(principal.getName())
+                .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado"));
+
+        return ResponseEntity.ok(usuario); // ✅ Devuelve el objeto Usuario correctamente
     }
     
 }
