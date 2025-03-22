@@ -58,6 +58,12 @@ public class ListaReproduccionController {
 
     @DeleteMapping("/{listName}")
     public ResponseEntity<Void> eliminarLista(@PathVariable String listName) {
+    	
+    	Optional<ListaReproduccion> lista = listaService.obtenerListaPorNombre(listName);
+    	if(!lista.isPresent()) {
+    		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    	}
+    	
         listaService.eliminarLista(listName);
         return ResponseEntity.noContent().build();
     }

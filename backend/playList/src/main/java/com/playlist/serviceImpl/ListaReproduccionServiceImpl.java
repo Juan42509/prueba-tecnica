@@ -54,12 +54,13 @@ public class ListaReproduccionServiceImpl implements ListaReproduccionService{
 	}
 
 	@Override
-	public void eliminarLista(String nombre) {
+	public Boolean eliminarLista(String nombre) {
 		Optional<ListaReproduccion> listaReproDel = listaRepo.findByNombre(nombre);
-		listaReproDel.ifPresent(listaReproDb ->{
-			listaRepo.delete(listaReproDb);
-		});
-		
+		if (listaReproDel.isPresent()) {
+	        listaRepo.delete(listaReproDel.get()); 
+	        return true; 
+	    }
+		return false;
 	}
 
 

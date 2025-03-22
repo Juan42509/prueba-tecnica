@@ -12,5 +12,5 @@ public interface ListaReproduccionService {
 	public List<ListaReproduccion> obtenerListas();
     public Optional<ListaReproduccion> obtenerListaPorNombre(String nombre);
     public Optional<Cancion> agregarCancion(Long listaId, Cancion cancion);
-    public void eliminarLista(String nombre);
+    public Boolean eliminarLista(String nombre);
 }
