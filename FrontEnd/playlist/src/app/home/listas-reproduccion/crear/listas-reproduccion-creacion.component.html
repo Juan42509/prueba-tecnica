@@ -1,0 +1,27 @@
+<div class="container mt-5">
+  <div class="card">
+      <div class="card-header bg-primary text-white">
+          <h4>Crear Lista de Reproducción</h4>
+      </div>
+      <div class="card-body">
+          <form id="playlistForm" (ngSubmit)="formSubmitList()">
+              <!-- Nombre de la lista -->
+              <div class="mb-3">
+                  <label for="nombre" class="form-label">Nombre de la lista</label>
+                  <input type="text" [(ngModel)]= "lista.nombre" name="nombre" class="form-control" id="nombre" required>
+              </div>
+
+              <!-- Descripción de la lista -->
+              <div class="mb-3">
+                  <label for="descripcion" class="form-label">Descripción</label>
+                  <textarea class="form-control" [(ngModel)]= "lista.descripcion" name="descripcion" id="descripcion" rows="2" required></textarea>
+              </div>
+
+              <hr>
+
+              <!-- Botón de enviar -->
+              <button type="submit" class="btn btn-success">Crear Lista</button>
+          </form>
+      </div>
+  </div>
+</div>

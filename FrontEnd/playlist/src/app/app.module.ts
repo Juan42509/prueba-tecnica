@@ -7,8 +7,10 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthInterceptorProviders } from './services/auth.interceptor';
-import { ListasReproduccionComponent } from './admin/listas-reproduccion/listas-reproduccion.component';
-import { ListasReproduccionCreacionComponent } from './admin/listas-reproduccion-creacion/listas-reproduccion-creacion.component';
+import { ListasReproduccionComponent } from './home/listas-reproduccion/listar/listas-reproduccion.component';
+import { ListasReproduccionCreacionComponent } from './home/listas-reproduccion/crear/listas-reproduccion-creacion.component';
+import { ListaRepodiccionEliminarComponent } from './home/listas-reproduccion/eliminar/lista-repodiccion-eliminar/lista-repodiccion-eliminar.component';
+import { AgregarCancionComponent } from './home/listas-reproduccion/agregar_cancion/agregar-cancion/agregar-cancion.component';
 
 
 @NgModule({
@@ -16,7 +18,9 @@ import { ListasReproduccionCreacionComponent } from './admin/listas-reproduccion
     AppComponent,
     LoginComponent,
     ListasReproduccionComponent,
-    ListasReproduccionCreacionComponent
+    ListasReproduccionCreacionComponent,
+    ListaRepodiccionEliminarComponent,
+    AgregarCancionComponent
   ],
   imports: [
     BrowserModule,

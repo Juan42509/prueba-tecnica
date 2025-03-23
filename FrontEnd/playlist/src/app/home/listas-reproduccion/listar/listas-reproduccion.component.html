@@ -1,0 +1,43 @@
+<body>
+
+  <div class="container d-flex justify-content-center">
+      <div class="card shadow-lg">
+          <div class="card-header bg-primary text-white text-center">
+              <h4>Listas de Reproducción</h4>
+          </div>
+          <div class="card-body">
+              <!-- Botón para Crear Lista -->
+              <div class="d-flex justify-content-start mb-3">
+                <button *ngIf="isAdmin" class="btn btn-success" routerLink="/home/add-list">Crear Lista</button>
+            </div>
+              <table class="table table-bordered text-center">
+                  <thead class="table-dark">
+                      <tr>
+                          <th>#</th>
+                          <th>Nombre</th>
+                          <th>Descripción</th>
+                          <th>Acciones</th>
+                      </tr>
+                  </thead>
+                  <tbody id="listasTable">
+                    <tr *ngFor="let lista of listas">
+                      <td>{{ lista.id }}</td>
+                      <td>{{ lista.nombre }}</td>
+                      <td>{{ lista.descripcion }}</td>
+                      <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                          Opciones
+                        </button>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" [routerLink]="['home/add-song', lista.id]" >Agregar Canciones</a></li>
+                          <li><a class="dropdown-item" >Editar</a></li>
+                        </ul>
+                      </div>
+                    </tr>
+                      <!-- Aquí se insertarán las listas dinámicamente -->
+                  </tbody>
+              </table>
+          </div>
+      </div>
+  </div>
+</body>

@@ -1,0 +1,10 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Ocupa el 100% de la altura de la pantalla */
+  background-color: #f8f9fa;
+}
+.card {
+  width: 60%; /* Ajusta el ancho del contenedor */
+}
