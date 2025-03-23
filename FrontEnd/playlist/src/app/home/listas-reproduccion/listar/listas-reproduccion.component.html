@@ -22,14 +22,14 @@
                   <tbody id="listasTable">
                     <tr *ngFor="let lista of listas">
                       <td>{{ lista.id }}</td>
-                      <td>{{ lista.nombre }}</td>
+                      <td><a [routerLink]="['/home/view-list', lista.nombre]"> {{ lista.nombre }}</a></td>
                       <td>{{ lista.descripcion }}</td>
                       <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
                           Opciones
                         </button>
                         <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" [routerLink]="['home/add-song', lista.id]" >Agregar Canciones</a></li>
+                          <li><a class="dropdown-item" [routerLink]="['/home/add-song', lista.id]" >Agregar Canciones</a></li>
                           <li><a class="dropdown-item" >Editar</a></li>
                         </ul>
                       </div>

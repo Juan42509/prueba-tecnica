@@ -5,6 +5,7 @@ import { ListasReproduccionComponent } from './home/listas-reproduccion/listar/l
 import { AdminGuard } from './guards/admin.guard';
 import { ListasReproduccionCreacionComponent } from './home/listas-reproduccion/crear/listas-reproduccion-creacion.component';
 import { AgregarCancionComponent } from './home/listas-reproduccion/agregar_cancion/agregar-cancion/agregar-cancion.component';
+import { PlaylistComponent } from './home/listas-reproduccion/verPlaylist/playlist/playlist.component';
 
 const routes: Routes = [
   {
@@ -23,9 +24,14 @@ const routes: Routes = [
     canActivate:[AdminGuard]
   },
   {
-    path:'home/add-song',
+    path:'home/add-song/:IdLista',
     component:AgregarCancionComponent,
     canActivate:[AdminGuard]
+  },
+  {
+    path:'home/view-list/:nameList',
+    component:PlaylistComponent,
+    pathMatch:'full'
   }
 ];
 

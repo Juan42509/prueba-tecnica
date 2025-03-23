@@ -16,4 +16,8 @@ export class ListaReproduccionService {
   public ObtenerListas(){
     return this.http.get(`${baseUrl}/lists`);
   }
+
+  public AgregarCancion(idLista:any , cancion:any){
+    return this.http.post(`${baseUrl}/lists/${idLista}/add-song`,cancion);
+  }
 }

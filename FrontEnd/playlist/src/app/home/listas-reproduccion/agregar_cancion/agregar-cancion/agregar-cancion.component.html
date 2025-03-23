@@ -1,1 +1,37 @@
-<p>agregar-cancion works!</p>
+<div class="container mt-5">
+  <div class="card">
+      <div class="card-header bg-primary text-white">
+          <h4>Agregar cancion</h4>
+      </div>
+      <div class="card-body">
+          <form id="playlistForm" (ngSubmit)="formSubmitCancion()">
+
+              <div class="mb-3">
+                  <label for="nombre" class="form-label">Nombre Cancion</label>
+                  <input type="text" [(ngModel)]= "cancion.titulo" name="titulo" class="form-control" id="titulo" required>
+              </div>
+              <div class="mb-3">
+                  <label for="nombre" class="form-label">Nombre del Artista</label>
+                  <input type="text" [(ngModel)]= "cancion.artista" name="artista" class="form-control" id="artista" required>
+              </div>
+              <div class="mb-3">
+                  <label for="nombre" class="form-label">Nombre del album</label>
+                  <input type="text" [(ngModel)]= "cancion.album" name="album" class="form-control" id="album" required>
+              </div>
+              <div class="mb-3">
+                  <label for="nombre" class="form-label">Año</label>
+                  <input type="number" [(ngModel)]= "cancion.anno" name="anno" class="form-control" id="anno" required>
+              </div>
+              <div class="mb-3">
+                <label for="nombre" class="form-label">Genero Musical</label>
+                <input type="text" [(ngModel)]= "cancion.genero" name="genero" class="form-control" id="genero" required>
+            </div>
+
+              <hr>
+
+              <!-- Botón de enviar -->
+              <button type="submit" class="btn btn-success">Crear Lista</button>
+          </form>
+      </div>
+  </div>
+</div>
