@@ -30,7 +30,7 @@
                         </button>
                         <ul class="dropdown-menu">
                           <li><a class="dropdown-item" [routerLink]="['/home/add-song', lista.id]" >Agregar Canciones</a></li>
-                          <li><a class="dropdown-item" >Editar</a></li>
+                          <li><a class="dropdown-item" *ngIf="isAdmin" (click)="eliminarLista(lista.nombre)">Eliminar</a></li>
                         </ul>
                       </div>
                     </tr>

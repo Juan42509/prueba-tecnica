@@ -35,4 +35,17 @@ export class ListasReproduccionComponent implements OnInit {
 
   }
 
+  eliminarLista(nombre_lista:any){
+    this.listaReproduccionService.eliminarListaReproduccion(nombre_lista).subscribe(
+      (data:any) =>{
+        alert("Se ha eliminado la lista")
+        window.location.reload();
+      },(error)=>{
+        console.log(error);
+        alert("Error al eliminar la lista")
+
+      }
+    )
+  }
+
 }

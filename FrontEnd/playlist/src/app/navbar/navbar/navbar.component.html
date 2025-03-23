@@ -1,0 +1,4 @@
+<nav class="navbar bg-secondary px-3" *ngIf="loginService.isLoggedIn()">
+  <button *ngIf="loginService.isLoggedIn()" class="btn btn-secondary border-0" routerLink="home">Inicio</button>
+  <button *ngIf="loginService.isLoggedIn()" (click)="logout()" class="btn btn-secondary border-0 ms-auto" >Cerrar Sesion</button>
+</nav>

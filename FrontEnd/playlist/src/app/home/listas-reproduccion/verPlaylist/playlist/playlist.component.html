@@ -1,1 +1,35 @@
-<p>playlist works!</p>
+<body>
+
+  <div class="container d-flex justify-content-center">
+      <div class="card shadow-lg">
+          <div class="card-header bg-primary text-white text-center">
+              <h4>Listas de Reproducción de <b>{{nombre_Lista}}</b></h4>
+          </div>
+          <div class="card-body">
+              <table class="table table-bordered text-center">
+                  <thead class="table-dark">
+                      <tr>
+                          <th>#</th>
+                          <th>Nombre</th>
+                          <th>Artista</th>
+                          <th>Album</th>
+                          <th>anno</th>
+                          <th>genero</th>
+                      </tr>
+                  </thead>
+                  <tbody id="listasTable">
+                    <tr *ngFor="let cancion of canciones">
+                      <td>{{ cancion.id }}</td>
+                      <td>{{ cancion.titulo }}</td>
+                      <td>{{ cancion.artista }}</td>
+                      <td>{{ cancion.album }}</td>
+                      <td>{{ cancion.anno }}</td>
+                      <td>{{ cancion.genero }}</td>
+                    </tr>
+                      <!-- Aquí se insertarán las listas dinámicamente -->
+                  </tbody>
+              </table>
+          </div>
+      </div>
+  </div>
+</body>

@@ -58,6 +58,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         .antMatchers("/h2-console/**").permitAll()
         
         // Autorización Basada en Roles
+        .antMatchers(HttpMethod.POST, "/lists/**/add-song").hasAnyRole("USER", "ADMIN")
         .antMatchers(HttpMethod.GET, "/lists/**").hasAnyRole("USER", "ADMIN") // Usuarios y Admins pueden ver listas
         .antMatchers(HttpMethod.POST, "/lists/**").hasRole("ADMIN") // Solo ADMIN puede crear listas
         .antMatchers(HttpMethod.DELETE, "/lists/**").hasRole("ADMIN") // Solo ADMIN puede borrar listas

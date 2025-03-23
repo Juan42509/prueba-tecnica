@@ -20,4 +20,12 @@ export class ListaReproduccionService {
   public AgregarCancion(idLista:any , cancion:any){
     return this.http.post(`${baseUrl}/lists/${idLista}/add-song`,cancion);
   }
+
+  public obtenerListaByNombre(Nombre_lista:any){
+    return this.http.get(`${baseUrl}/lists/${Nombre_lista}`);
+  }
+
+  public eliminarListaReproduccion(Nombre_lista:any){
+    return this.http.delete(`${baseUrl}/lists/${Nombre_lista}`);
+  }
 }

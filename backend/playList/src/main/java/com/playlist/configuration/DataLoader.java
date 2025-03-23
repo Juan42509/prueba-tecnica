@@ -27,7 +27,7 @@ public class DataLoader {
 
             if (!usuarioRepository.findByUsername("user").isPresent()) {
                 Usuario user = new Usuario();
-                user.setUsername("user");
+                user.setUsername("jfmaldonado");
                 user.setPassword(passwordEncoder.encode("user123")); // Encriptar contraseña
                 user.setNombre("Usuario");
                 user.setApellido("Normal");

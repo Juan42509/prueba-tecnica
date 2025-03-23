@@ -12,6 +12,7 @@ import { ListasReproduccionCreacionComponent } from './home/listas-reproduccion/
 import { ListaRepodiccionEliminarComponent } from './home/listas-reproduccion/eliminar/lista-repodiccion-eliminar/lista-repodiccion-eliminar.component';
 import { AgregarCancionComponent } from './home/listas-reproduccion/agregar_cancion/agregar-cancion/agregar-cancion.component';
 import { PlaylistComponent } from './home/listas-reproduccion/verPlaylist/playlist/playlist.component';
+import { NavbarComponent } from './navbar/navbar/navbar.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { PlaylistComponent } from './home/listas-reproduccion/verPlaylist/playli
     ListasReproduccionCreacionComponent,
     ListaRepodiccionEliminarComponent,
     AgregarCancionComponent,
-    PlaylistComponent
+    PlaylistComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
