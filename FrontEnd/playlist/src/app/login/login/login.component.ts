@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
           if(this.loginService.getUserRol() == "ROLE_ADMIN"){
             //Dashboard admin
             // window.location.href = '/admin'
-            this.router.navigate(['admin']);
+            this.router.navigate(['admin/add-list']);
             this.loginService.loginStatusSubject.next(true);
           }else if(this.loginService.getUserRol() == "NORMAL"){
             // window.location.href = '/user-dasboard'

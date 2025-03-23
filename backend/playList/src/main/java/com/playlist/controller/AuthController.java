@@ -72,7 +72,7 @@ public class AuthController {
         Usuario usuario = usuarioRepository.findByUsername(principal.getName())
                 .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado"));
 
-        return ResponseEntity.ok(usuario); // ✅ Devuelve el objeto Usuario correctamente
+        return ResponseEntity.ok(usuario); // Devuelve el objeto Usuario correctamente
     }
     
 }
