@@ -1,77 +1,121 @@
 package com.playlist.app;
 
+import com.playlist.entity.Cancion;
 import com.playlist.entity.ListaReproduccion;
+import com.playlist.repository.CancionRepository;
 import com.playlist.repository.ListaReproduccionRepository;
 import com.playlist.service.ListaReproduccionService;
-
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-class ListaReproduccionServiceTest {
+@SpringBootTest
+public class ListaReproduccionServiceTest {
 
-    @Mock
-    private ListaReproduccionRepository listaRepo;
-
-    @InjectMocks
+    @Autowired
     private ListaReproduccionService listaService;
 
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.openMocks(this);
+    @MockBean
+    private ListaReproduccionRepository listaRepo;
+
+    @MockBean
+    private CancionRepository cancionRepo;
+
+    @Test
+    public void testCrearLista() {
+        ListaReproduccion lista = new ListaReproduccion();
+        lista.setNombre("Mi Playlist");
+
+        when(listaRepo.save(lista)).thenReturn(lista);
+
+        ListaReproduccion resultado = listaService.crearLista(lista);
+
+        assertNotNull(resultado);
+        assertEquals("Mi Playlist", resultado.getNombre());
+        verify(listaRepo, times(1)).save(lista);
     }
 
     @Test
-    void testCrearLista() {
-        ListaReproduccion lista = new ListaReproduccion("Lista Rock", "Lista de Rock Clásico");
+    public void testObtenerListas() {
+        ListaReproduccion lista1 = new ListaReproduccion();
+        lista1.setNombre("Salsa");
 
-        when(listaRepo.save(any(ListaReproduccion.class))).thenReturn(lista);
+        ListaReproduccion lista2 = new ListaReproduccion();
+        lista2.setNombre("Merengue");
 
-        ListaReproduccion creada = listaService.crearLista(lista);
+        when(listaRepo.findAll()).thenReturn(Arrays.asList(lista1, lista2));
 
-        assertNotNull(creada);
-        assertEquals("Lista Rock", creada.getNombre());
-        assertEquals("Lista de Rock Clásico", creada.getDescripcion());
+        List<ListaReproduccion> listas = listaService.obtenerListas();
+
+        assertEquals(2, listas.size());
+        verify(listaRepo, times(1)).findAll();
     }
 
     @Test
-    void testObtenerListaPorNombre() {
-        ListaReproduccion lista = new ListaReproduccion("Lista Pop", "Lista de Pop Clásico");
+    public void testObtenerListaPorNombre() {
+        ListaReproduccion lista = new ListaReproduccion();
+        lista.setNombre("Rock");
 
-        when(listaRepo.findByNombre("Lista Pop")).thenReturn(Optional.of(lista));
+        when(listaRepo.findByNombre("Rock")).thenReturn(Optional.of(lista));
 
-        Optional<ListaReproduccion> encontrada = listaService.obtenerListaPorNombre("Lista Pop");
+        Optional<ListaReproduccion> resultado = listaService.obtenerListaPorNombre("Rock");
 
-        assertTrue(encontrada.isPresent());
-        assertEquals("Lista Pop", encontrada.get().getNombre());
+        assertTrue(resultado.isPresent());
+        assertEquals("Rock", resultado.get().getNombre());
+        verify(listaRepo, times(1)).findByNombre("Rock");
     }
 
     @Test
-    void testEliminarLista_Existente() {
-        ListaReproduccion lista = new ListaReproduccion("Lista Jazz", "Lista de Jazz Clásico");
+    public void testAgregarCancion() {
+        ListaReproduccion lista = new ListaReproduccion();
+        lista.setId(1L);
+        lista.setNombre("Rock");
 
-        when(listaRepo.findByNombre("Lista Jazz")).thenReturn(Optional.of(lista));
+        Cancion cancion = new Cancion();
+        cancion.setTitulo("Bohemian Rhapsody");
+
+        when(listaRepo.findById(1L)).thenReturn(Optional.of(lista));
+        when(cancionRepo.save(any(Cancion.class))).thenReturn(cancion);
+
+        Optional<Cancion> resultado = listaService.agregarCancion(1L, cancion);
+
+        assertTrue(resultado.isPresent());
+        assertEquals("Bohemian Rhapsody", resultado.get().getTitulo());
+        verify(listaRepo, times(1)).findById(1L);
+        verify(cancionRepo, times(1)).save(cancion);
+    }
+
+    @Test
+    public void testEliminarLista_Success() {
+        ListaReproduccion lista = new ListaReproduccion();
+        lista.setNombre("Vallenato");
+
+        when(listaRepo.findByNombre("Vallenato")).thenReturn(Optional.of(lista));
         doNothing().when(listaRepo).delete(lista);
 
-        boolean eliminada = listaService.eliminarLista("Lista Jazz");
+        Boolean resultado = listaService.eliminarLista("Vallenato");
 
-        assertTrue(eliminada);
+        assertTrue(resultado);
+        verify(listaRepo, times(1)).findByNombre("Vallenato");
         verify(listaRepo, times(1)).delete(lista);
     }
 
     @Test
-    void testEliminarLista_NoExistente() {
-        when(listaRepo.findByNombre("Lista Inexistente")).thenReturn(Optional.empty());
+    public void testEliminarLista_NotFound() {
+        when(listaRepo.findByNombre("Inexistente")).thenReturn(Optional.empty());
 
-        boolean eliminada = listaService.eliminarLista("Lista Inexistente");
+        Boolean resultado = listaService.eliminarLista("Inexistente");
 
-        assertFalse(eliminada);
+        assertFalse(resultado);
+        verify(listaRepo, times(1)).findByNombre("Inexistente");
+        verify(listaRepo, never()).delete(any());
     }
 }
