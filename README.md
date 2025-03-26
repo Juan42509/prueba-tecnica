@@ -15,3 +15,11 @@ Prueba tecnica que implementa un sistema para la gestión de listas de reproducc
 - Bootstrap 5  
 - Fetch API / HttpClientModule para consumo del backend  
 - Node.js v20.15.0 
+
+# Usuario Administrador
+- username: admin
+- password: admin123
+
+# Usuario normal
+- username: jfmaldonado
+- password: user123
